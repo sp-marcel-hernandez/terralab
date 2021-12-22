@@ -25,6 +25,14 @@ run:
 	go run github.com/sp-marcel-hernandez/cmd/terralab
 ```
 
+Better yet, they can be segregated to a separate file and loaded.
+This allows easy copy-pasting into GoLand's Run Configuration environment:
+
+```
+include .env
+export
+```
+
 
 ### Deep dive into LocalStack environment variables
 
