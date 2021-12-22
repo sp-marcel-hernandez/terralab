@@ -3,9 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 )
 
 func main() {
 	fmt.Println("wololo")
-	fmt.Println(os.Getenv("SP_CONVERT"))
+	for {
+		fmt.Println(os.Getenv("SP_CONVERT"))
+		time.Sleep(3 * time.Second)
+	}
 }
