@@ -1,10 +1,27 @@
 version: "3.8"
 
 services:
+  starter:
+    image: dadarek/wait-for-dependencies:latest
+    command: localstack:4566
+    depends_on:
+      - localstack
+    environment:
+      - SLEEP_LENGTH=5
+      - TIMEOUT_LENGTH=100
   localstack:
     image: localstack/localstack:0.13.2
+    environment:
+      - IMAGE_NAME=localstack/localstack:0.13.2
+      - MAIN_CONTAINER_NAME=terralab_localstack_1
+      - SERVICES=ec2,dynamodb
     ports:
       - "127.0.0.1:4566:4566"
-
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - localstack_data:/tmp/localstack
   terraform:
     image: hashicorp/terraform:1.1.2
+
+volumes:
+  localstack_data: ~
