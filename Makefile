@@ -2,6 +2,9 @@
 
 export SP_CONVERT=UUooOoOoooUUUOoOoOOO
 
+up:
+	docker-compose run --rm starter
+
 build:
 	go build -o out/terralab github.com/sp-marcel-hernandez/terralab/cmd/terralab
 

@@ -12,9 +12,10 @@ services:
   localstack:
     image: localstack/localstack:0.13.2
     environment:
+      - DEBUG=1
       - IMAGE_NAME=localstack/localstack:0.13.2
       - MAIN_CONTAINER_NAME=terralab_localstack_1
-      - SERVICES=ec2,dynamodb
+      - SERVICES=dynamodb,ec2,s3
     ports:
       - "127.0.0.1:4566:4566"
     volumes:
