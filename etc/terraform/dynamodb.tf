@@ -1,14 +1,20 @@
-resource "aws_dynamodb_table" "sample_table" {
-  name = "sample_table"
+resource "aws_dynamodb_table" "Ranking" {
+  name = "Ranking"
 
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
-    name = "ID"
+    name = "PlayerID"
     type = "S"
   }
 
-  hash_key  = "ID"
+  attribute {
+    name = "Score"
+    type = "N"
+  }
+
+  hash_key  = "PlayerID"
+  range_key = "Score"
 
   lifecycle {
     create_before_destroy = true
@@ -16,6 +22,6 @@ resource "aws_dynamodb_table" "sample_table" {
   }
 
   tags = {
-    Foo = "Bar"
+    Environment = var.environment
   }
 }
