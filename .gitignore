@@ -1,4 +1,9 @@
-*.idea/
+.idea/
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+.terraform/
 docker-compose.override.yml
 out/
+terraform.tfstate
+terraform.tfstate.backup
 vendor/

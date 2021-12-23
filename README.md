@@ -3,6 +3,7 @@
 ## Requirements
 
 * Go Toolchain +1.17
+* `$GOPATH/bin` in your `$PATH` - `/home/you/go/bin` (Linux) or `/Users/you/go/bin` (Mac OS)
 * GNU Make
 * docker
 * docker-compose

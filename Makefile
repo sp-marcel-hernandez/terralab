@@ -10,11 +10,13 @@ run: install-tools stack-up build
 	./out/terralab
 
 clean: stack-down
-	rm -rf out
+	rm -rf \
+	etc/terraform/.terraform \
+	etc/terraform/.terraform.lock.hcl \
+	etc/terraform/terraform.tfstate \
+	etc/terraform/terraform.tfstate.backup \
+	out
 
-###################
-### CI Commands ###
-###################
 
 #######################
 ### Helper Commands ###
@@ -27,6 +29,8 @@ build:
 
 stack-up:
 	docker-compose run --rm starter
+	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform init
+	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform apply -auto-approve
 
 stack-down:
 	docker-compose down -v
