@@ -1,4 +1,4 @@
-.PHONY: up down install-tools setup-services debug-build
+.PHONY: up down install-tools setup-services protoc debug-build
 
 include .env
 export
@@ -6,7 +6,7 @@ export
 ##########################
 ### Developer Commands ###
 ##########################
-up: install-tools setup-services debug-build
+up: install-tools setup-services protoc debug-build
 	./out/terralab
 
 down:
@@ -28,6 +28,9 @@ setup-services:
 	docker-compose run --rm starter
 	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform init
 	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform apply -auto-approve
+
+protoc:
+	docker-compose run --rm --user $(shell id -u):$(shell id -g) protoc
 
 debug-build:
 	go build -o out/terralab -gcflags="all=-N -l" github.com/sp-marcel-hernandez/terralab/cmd/terralab

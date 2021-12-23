@@ -9,6 +9,7 @@ services:
     environment:
       - SLEEP_LENGTH=5
       - TIMEOUT_LENGTH=100
+
   localstack:
     image: localstack/localstack:0.13.2
     environment:
@@ -22,11 +23,21 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - localstack_data:/tmp/localstack
+
   terraform:
     image: hashicorp/terraform:1.1.2
     volumes:
       - ./etc/terraform:/tmp/terraform
     working_dir: /tmp/terraform
+
+  protoc:
+    image: 1maa/protoc:latest
+    entrypoint: protoc --proto_path=etc/protos --go_out=. --go-grpc_out=.
+    command: |
+      ranking_service.proto
+    volumes:
+      - .:/tmp/terralab
+    working_dir: /tmp/terralab
 
 volumes:
   localstack_data: ~

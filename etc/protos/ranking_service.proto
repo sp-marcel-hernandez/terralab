@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package terralab;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "internal/pb";
+
+service RankingService {
+  rpc PutScore (PlayerRecord) returns (google.protobuf.Empty);
+  rpc GetScore (GetScoreRequest) returns (Ranking);
+}
+
+message PlayerRecord {
+  string playerId = 1;
+  uint64 score = 2;
+}
+
+message GetScoreRequest {
+  uint64 top = 1;
+}
+
+message Ranking {
+  repeated PlayerRecord ranking = 1;
+}
