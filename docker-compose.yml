@@ -16,6 +16,7 @@ services:
       - IMAGE_NAME=localstack/localstack:0.13.2
       - MAIN_CONTAINER_NAME=terralab_localstack_1
       - SERVICES=dynamodb,ec2,s3
+      - SET_TERM_HANDLER=1
     ports:
       - "127.0.0.1:4566:4566"
     volumes:

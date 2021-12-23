@@ -57,6 +57,10 @@ environment:
   # the container name the internal localstack CLI (at /opt/code/localstack/bin/localstack) doesn't work.
   # This is the automatic name given by docker-compose
   - MAIN_CONTAINER_NAME=terralab_localstack_1
+  
+  # Makes LocalStack shutdown fast and properly instead of waiting for 20 seconds until Docker kills it by force.
+  # Because why do the correct thing by default.
+  - SET_TERM_HANDLER=1
 ```
 
 
