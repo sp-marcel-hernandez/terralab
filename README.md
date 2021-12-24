@@ -1,9 +1,12 @@
 # terralab
 
+Ranking API on steroids, see [`etc/grpc`](etc/grpc/ranking_service.proto) for service definition.
+Research project.
+
 ## Requirements
 
 * Go Toolchain +1.17
-* `$GOPATH/bin` in your `$PATH` - `/home/you/go/bin` (Linux) or `/Users/you/go/bin` (Mac OS)
+* `$GOPATH/bin` in your `$PATH` - by default it's `/home/$USER/go/bin` (Linux) or `/Users/$USER/go/bin` (Mac OS)
 * GNU Make
 * docker
 * docker-compose

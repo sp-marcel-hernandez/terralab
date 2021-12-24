@@ -32,7 +32,7 @@ services:
 
   protoc:
     image: 1maa/protoc:latest
-    entrypoint: protoc --proto_path=etc/protos --go_out=. --go-grpc_out=.
+    entrypoint: protoc --proto_path=etc/grpc --go_out=. --go-grpc_out=.
     command: |
       ranking_service.proto
     volumes:
