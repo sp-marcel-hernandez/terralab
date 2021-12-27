@@ -9,6 +9,6 @@ type Player struct {
 type Ranking []Player
 
 type RankingRepository interface {
-	SavePlayer(p *Player) error
-	GetTopRanking(top uint64) (*Ranking, error)
+	SavePlayer(p Player) error
+	GetTopRanking(top uint64) (Ranking, error)
 }

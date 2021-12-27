@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/sp-marcel-hernandez/terralab/internal/grpc_impl"
+	"github.com/sp-marcel-hernandez/terralab/internal/storage/memory"
 	"github.com/sp-marcel-hernandez/terralab/pkg/pb"
 	"google.golang.org/grpc"
 )
@@ -19,7 +20,7 @@ func main() {
 	log.Printf("server listening at %v", listener.Addr())
 
 	s := grpc.NewServer()
-	pb.RegisterRankingServiceServer(s, &grpc_impl.RankingService{})
+	pb.RegisterRankingServiceServer(s, &grpc_impl.RankingService{Repository: &memory.MemoryStorage{}})
 
 	if err := s.Serve(listener); err != nil {
 		log.Fatalf("failed to serve: %v", err)

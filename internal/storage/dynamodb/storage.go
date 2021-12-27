@@ -7,7 +7,7 @@ import (
 type DynamoStorage struct {
 }
 
-func (ms *DynamoStorage) SavePlayer(p *internal.Player) error {
+func (ms *DynamoStorage) SavePlayer(p internal.Player) error {
 	return nil
 }
 

@@ -10,8 +10,8 @@ type MemoryStorage struct {
 	inMemoryRanking internal.Ranking
 }
 
-func (ms *MemoryStorage) SavePlayer(p *internal.Player) error {
-	ms.inMemoryRanking = append(ms.inMemoryRanking, *p)
+func (ms *MemoryStorage) SavePlayer(p internal.Player) error {
+	ms.inMemoryRanking = append(ms.inMemoryRanking, p)
 	sort.Sort(byScore(ms.inMemoryRanking))
 
 	return nil
