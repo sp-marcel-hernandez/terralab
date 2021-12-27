@@ -3,23 +3,18 @@ package grpc_impl
 import (
 	"context"
 
-	"github.com/sp-marcel-hernandez/terralab/internal"
+	common "github.com/sp-marcel-hernandez/terralab/internal"
 	"github.com/sp-marcel-hernandez/terralab/pkg/pb"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 type RankingService struct {
 	pb.UnimplementedRankingServiceServer
-	Repository internal.RankingRepository
+	Repository common.RankingRepository
 }
 
-func (s *RankingService) PutScore(ctx context.Context, gp *pb.PlayerRecord) (*emptypb.Empty, error) {
-	ip := &internal.Player{
-		Id:    gp.PlayerId,
-		Score: gp.Score,
-	}
-
-	return &emptypb.Empty{}, s.Repository.SavePlayer(*ip)
+func (s *RankingService) PutScore(ctx context.Context, p *pb.PlayerRecord) (*emptypb.Empty, error) {
+	return &emptypb.Empty{}, s.Repository.SavePlayer(*toInternalPlayer(p))
 }
 
 func (s *RankingService) GetScore(ctx context.Context, gp *pb.GetScoreRequest) (*pb.Ranking, error) {
@@ -30,9 +25,17 @@ func (s *RankingService) GetScore(ctx context.Context, gp *pb.GetScoreRequest) (
 	}
 
 	gr := &pb.Ranking{}
-	for _, ip := range ir {
-		gr.Ranking = append(gr.Ranking, &pb.PlayerRecord{PlayerId: ip.Id, Score: ip.Score})
+	for _, p := range ir {
+		gr.Ranking = append(gr.Ranking, toGrpcPlayer(&p))
 	}
 
 	return gr, nil
+}
+
+func toInternalPlayer(p *pb.PlayerRecord) *common.Player {
+	return &common.Player{Id: p.PlayerId, Score: p.Score}
+}
+
+func toGrpcPlayer(p *common.Player) *pb.PlayerRecord {
+	return &pb.PlayerRecord{PlayerId: p.Id, Score: p.Score}
 }

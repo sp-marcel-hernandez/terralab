@@ -3,21 +3,21 @@ package memory
 import (
 	"sort"
 
-	"github.com/sp-marcel-hernandez/terralab/internal"
+	common "github.com/sp-marcel-hernandez/terralab/internal"
 )
 
 type MemoryStorage struct {
-	inMemoryRanking internal.Ranking
+	inMemoryRanking common.Ranking
 }
 
-func (ms *MemoryStorage) SavePlayer(p internal.Player) error {
+func (ms *MemoryStorage) SavePlayer(p common.Player) error {
 	ms.inMemoryRanking = append(ms.inMemoryRanking, p)
 	sort.Sort(byScore(ms.inMemoryRanking))
 
 	return nil
 }
 
-func (ms *MemoryStorage) GetTopRanking(top uint64) (internal.Ranking, error) {
+func (ms *MemoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
 	if top >= uint64(len(ms.inMemoryRanking)) {
 		return ms.inMemoryRanking, nil
 	}
@@ -25,7 +25,7 @@ func (ms *MemoryStorage) GetTopRanking(top uint64) (internal.Ranking, error) {
 	return ms.inMemoryRanking[:top], nil
 }
 
-type byScore internal.Ranking
+type byScore common.Ranking
 
 func (bs byScore) Len() int {
 	return len(bs)

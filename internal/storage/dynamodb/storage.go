@@ -1,16 +1,14 @@
 package dynamodb
 
-import (
-	"github.com/sp-marcel-hernandez/terralab/internal"
-)
+import common "github.com/sp-marcel-hernandez/terralab/internal"
 
 type DynamoStorage struct {
 }
 
-func (ms *DynamoStorage) SavePlayer(p internal.Player) error {
+func (ms *DynamoStorage) SavePlayer(p common.Player) error {
 	return nil
 }
 
-func (ms *DynamoStorage) GetTopRanking(top uint64) (internal.Ranking, error) {
+func (ms *DynamoStorage) GetTopRanking(top uint64) (common.Ranking, error) {
 	return nil, nil
 }
