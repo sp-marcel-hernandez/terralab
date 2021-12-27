@@ -1,6 +1,7 @@
 .idea/
 .terraform.tfstate.lock.info
 .terraform/
+*.tfvars
 docker-compose.override.yml
 out/
 terraform.tfstate
