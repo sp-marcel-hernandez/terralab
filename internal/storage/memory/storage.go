@@ -7,22 +7,29 @@ import (
 )
 
 type MemoryStorage struct {
-	inMemoryRanking common.Ranking
+	storage map[string]common.Player
 }
 
 func (ms *MemoryStorage) SavePlayer(p common.Player) error {
-	ms.inMemoryRanking = append(ms.inMemoryRanking, p)
-	sort.Sort(byScore(ms.inMemoryRanking))
+	ms.storage[p.Id] = p
 
 	return nil
 }
 
 func (ms *MemoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
-	if top >= uint64(len(ms.inMemoryRanking)) {
-		return ms.inMemoryRanking, nil
+	var ranking common.Ranking
+
+	for _, player := range ms.storage {
+		ranking = append(ranking, player)
 	}
 
-	return ms.inMemoryRanking[:top], nil
+	sort.Sort(byScore(ranking))
+
+	if top >= uint64(len(ranking)) {
+		return ranking, nil
+	}
+
+	return ranking[:top], nil
 }
 
 type byScore common.Ranking

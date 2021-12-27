@@ -5,10 +5,10 @@ import common "github.com/sp-marcel-hernandez/terralab/internal"
 type DynamoStorage struct {
 }
 
-func (ms *DynamoStorage) SavePlayer(p common.Player) error {
+func (ds *DynamoStorage) SavePlayer(p common.Player) error {
 	return nil
 }
 
-func (ms *DynamoStorage) GetTopRanking(top uint64) (common.Ranking, error) {
+func (ds *DynamoStorage) GetTopRanking(top uint64) (common.Ranking, error) {
 	return nil, nil
 }
