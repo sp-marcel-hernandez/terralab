@@ -4,7 +4,7 @@ package terralab;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "internal/pb";
+option go_package = "pkg/pb";
 
 service RankingService {
   rpc PutScore (PlayerRecord) returns (google.protobuf.Empty);
