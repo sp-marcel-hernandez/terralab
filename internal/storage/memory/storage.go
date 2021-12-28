@@ -2,11 +2,13 @@ package memory
 
 import (
 	"sort"
+	"sync"
 
 	common "github.com/sp-marcel-hernandez/terralab/internal"
 )
 
 type memoryStorage struct {
+	mux     sync.Mutex
 	storage map[string]common.Player
 }
 
@@ -18,12 +20,18 @@ func NewMemoryStorage() *memoryStorage {
 }
 
 func (ms *memoryStorage) SavePlayer(p common.Player) error {
+	ms.mux.Lock()
+	defer ms.mux.Unlock()
+
 	ms.storage[p.Id] = p
 
 	return nil
 }
 
 func (ms *memoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
+	ms.mux.Lock()
+	defer ms.mux.Unlock()
+
 	ranking := make(common.Ranking, len(ms.storage))
 
 	i := 0
