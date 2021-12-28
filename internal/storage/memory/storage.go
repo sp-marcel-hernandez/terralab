@@ -6,17 +6,24 @@ import (
 	common "github.com/sp-marcel-hernandez/terralab/internal"
 )
 
-type MemoryStorage struct {
+type memoryStorage struct {
 	storage map[string]common.Player
 }
 
-func (ms *MemoryStorage) SavePlayer(p common.Player) error {
+func NewMemoryStorage() *memoryStorage {
+	ms := &memoryStorage{}
+	ms.storage = make(map[string]common.Player)
+
+	return ms
+}
+
+func (ms *memoryStorage) SavePlayer(p common.Player) error {
 	ms.storage[p.Id] = p
 
 	return nil
 }
 
-func (ms *MemoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
+func (ms *memoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
 	var ranking common.Ranking
 
 	for _, player := range ms.storage {

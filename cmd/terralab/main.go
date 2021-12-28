@@ -20,7 +20,7 @@ func main() {
 	log.Printf("server listening at %v", listener.Addr())
 
 	s := grpc.NewServer()
-	pb.RegisterRankingServiceServer(s, &grpc_impl.RankingService{Repository: &memory.MemoryStorage{}})
+	pb.RegisterRankingServiceServer(s, &grpc_impl.RankingService{Repository: memory.NewMemoryStorage()})
 
 	if err := s.Serve(listener); err != nil {
 		log.Fatalf("failed to serve: %v", err)
