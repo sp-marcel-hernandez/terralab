@@ -73,7 +73,7 @@ Status: Done
 
 1. `$ make run`
 2. Put breakpoints in source file
-3. `Run > Attach to Process (Ctrl+Alt+5) > Select ./out/terralab`
+3. `Run > Attach to Process (Ctrl+Alt+5) > Select ./out/terralab-dev`
 4. Trigger breakpoint (e.g. wait for code to run or make HTTP request)
 
 https://www.jetbrains.com/help/go/attach-to-running-go-processes-with-debugger.html
