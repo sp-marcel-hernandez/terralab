@@ -25,6 +25,7 @@ install-tools:
 	go install github.com/google/gops@latest
 
 setup-services:
+	docker-compose pull
 	docker-compose run --rm starter
 	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform init
 	docker-compose run --rm --user $(shell id -u):$(shell id -g) terraform apply -auto-approve
