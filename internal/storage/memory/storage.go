@@ -24,10 +24,12 @@ func (ms *memoryStorage) SavePlayer(p common.Player) error {
 }
 
 func (ms *memoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
-	var ranking common.Ranking
+	ranking := make(common.Ranking, len(ms.storage))
 
+	i := 0
 	for _, player := range ms.storage {
-		ranking = append(ranking, player)
+		ranking[i] = player
+		i++
 	}
 
 	sort.Sort(byScore(ranking))
