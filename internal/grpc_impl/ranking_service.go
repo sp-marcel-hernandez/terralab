@@ -13,23 +13,23 @@ type RankingService struct {
 	Repository common.RankingRepository
 }
 
-func (s *RankingService) PutScore(ctx context.Context, p *pb.PlayerRecord) (*emptypb.Empty, error) {
-	return &emptypb.Empty{}, s.Repository.SavePlayer(*toInternalPlayer(p))
+func (rs *RankingService) PutScore(ctx context.Context, req *pb.PlayerRecord) (*emptypb.Empty, error) {
+	return &emptypb.Empty{}, rs.Repository.SavePlayer(*toInternalPlayer(req))
 }
 
-func (s *RankingService) GetScore(ctx context.Context, gp *pb.GetScoreRequest) (*pb.Ranking, error) {
-	ir, err := s.Repository.GetTopRanking(gp.Top)
+func (rs *RankingService) GetScore(ctx context.Context, req *pb.GetScoreRequest) (*pb.Ranking, error) {
+	ranking, err := rs.Repository.GetTopRanking(req.Top)
 
 	if err != nil {
 		return nil, err
 	}
 
-	gr := &pb.Ranking{}
-	for _, p := range ir {
-		gr.Ranking = append(gr.Ranking, toGrpcPlayer(&p))
+	res := &pb.Ranking{}
+	for _, player := range ranking {
+		res.Ranking = append(res.Ranking, toGrpcPlayer(&player))
 	}
 
-	return gr, nil
+	return res, nil
 }
 
 func toInternalPlayer(p *pb.PlayerRecord) *common.Player {

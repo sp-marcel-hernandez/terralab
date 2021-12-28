@@ -30,15 +30,14 @@ func (ms *memoryStorage) SavePlayer(p common.Player) error {
 
 func (ms *memoryStorage) GetTopRanking(top uint64) (common.Ranking, error) {
 	ms.mux.Lock()
-	defer ms.mux.Unlock()
 
-	ranking := make(common.Ranking, len(ms.storage))
+	ranking := make(common.Ranking, 0, len(ms.storage))
 
-	i := 0
 	for _, player := range ms.storage {
-		ranking[i] = player
-		i++
+		ranking = append(ranking, player)
 	}
+
+	ms.mux.Unlock()
 
 	sort.Sort(byScore(ranking))
 
