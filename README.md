@@ -5,10 +5,10 @@ Research project.
 
 ## Requirements
 
-* Go Toolchain +1.17
+* Go Toolchain +1.18
 * `$GOPATH/bin` in your `$PATH` - by default it's `/home/$USER/go/bin` (Linux) or `/Users/$USER/go/bin` (Mac OS)
 * GNU Make
-* docker
+* Docker
 * docker-compose
 * JetBrains GoLand
 
@@ -81,7 +81,7 @@ https://www.jetbrains.com/help/go/attach-to-running-go-processes-with-debugger.h
 
 ### Clean LocalStack provisioning via Terraform without building any Docker images
 
-Status: Pending
+Status: Done
 
 
 ### Testing from console with correct environment

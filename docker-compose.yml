@@ -11,10 +11,10 @@ services:
       - TIMEOUT_LENGTH=100
 
   localstack:
-    image: localstack/localstack:0.14.3
+    image: localstack/localstack:0.14.3.1
     environment:
       - DATA_DIR=/tmp/localstack/data
-      - IMAGE_NAME=localstack/localstack:0.14.3
+      - IMAGE_NAME=localstack/localstack:0.14.3.1
       - MAIN_CONTAINER_NAME=terralab_localstack_1
       - SERVICES=dynamodb,ec2,s3
       - SET_TERM_HANDLER=1
@@ -25,7 +25,7 @@ services:
       - localstack_data:/tmp/localstack
 
   terraform:
-    image: hashicorp/terraform:1.2.1
+    image: hashicorp/terraform:1.2.2
     volumes:
       - ./etc/terraform:/tmp/terraform
     working_dir: /tmp/terraform
